@@ -1,0 +1,99 @@
+{
+	"-UIScript": {
+		"scope": "lua",
+		"prefix": "-ui-script",
+		"body": [
+			"$1 = {}\n",
+			"---@param script UIScript",
+			"function $1.Init(script)",
+				"\t$1.AddEvent(script)",
+				"\t$1.InitUIData(script)",
+			"end\n",
+			
+			"---@param script UIScript",
+			"function $1.PreShow(script)",
+			"end\n",
+			
+			"---@param script UIScript",
+			"function $1.OnShow(script)",
+				"\t$1.Update$1(script)",
+			"end\n",
+			
+			"---@param script UIScript",
+			"function $1.OnHide(script)",
+			"end\n",
+			
+			"---@param script UIScript",
+			"function $1.OnDestory(script)",
+				"\t$1.RemoveEvent(script)",
+				"\tscript:RemoveParam()",
+			"end\n",
+			
+			"---@param script UIScript",
+			"function $1.AddEvent(script)",
+				"\tscript:AddButtonOnClickByName('Btn_Close', $1.OnClose)",
+			"end\n",
+			
+			"---@param script UIScript",
+			"function $1.RemoveEvent(script)",
+			"end\n",
+			
+			"---@param script UIScript",
+			"function $1.Update$1(script)",
+			   "\tlocal tUIData = $1.GetUIData(script)",
+			"end\n",
+			
+			"---@param script UIScript",
+			"function $1.OnClose(script)",
+				"\tscript:Hide()",
+			"end\n",
+			
+			"function $1.InitUIData(script)",
+				"\tlocal tUIData = {}",
+				"\tscript:SetParam($1.GetUIDataName(script), tUIData)",
+			"end\n",
+			
+			"function $1.GetUIData(script)",
+				"\tlocal tUIData = script:GetParam($1.GetUIDataName(script))",
+				"\tif tUIData then",
+					"\treturn tUIData",
+				"\tend\n",
+			
+				"\t$1.InitUIData(script)",
+				"\treturn script:GetParam($1.GetUIDataName(script))",
+			"end\n",
+			
+			"function $1.GetUIDataName(script)",
+				"\treturn '$1UIData'",
+			"end",
+		],
+		"description": "UI脚本默认代码"
+	},
+	"-UIFunction": {
+		"scope": "lua",
+		"prefix": "-ui-function",
+		"body": [
+			"---@param script UIScript",
+			"function $1.$2(script)",
+			"\tlocal tUIData = $1.GetUIData(script)",
+			"end\n",
+		],
+		"description": "添加一个UI方法"
+	},
+	"-Type": {
+		"scope": "lua",
+		"prefix": "-type",
+		"body": [
+			"---@type $1",
+		],
+		"description": "变量增加注解"
+	},
+	"-UIFunctionType": {
+		"scope": "lua",
+		"prefix": "-function_type",
+		"body": [
+			"---@param script UIScript",
+		],
+		"description": "方法增加注解"
+	},
+}
